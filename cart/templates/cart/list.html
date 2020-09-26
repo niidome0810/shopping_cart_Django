@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+{% extends 'base.html' %}
+
+{% block title %}カート{% endblock %}
+
+{% block content %}
+  <ul>
+    {% for product in products %}
+	    <li>{{ product.name }}: {{ product.price }}円</li>
+	{% endfor %}
+  </ul>
+
+  合計金額: {{ total_price }}円
+{% endblock %}
+</html>

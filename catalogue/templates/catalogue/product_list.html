@@ -1,9 +1,27 @@
 <!DOCTYPE html>
-{% extends "catalogue/base.html" %}
+<html lang="ja">
+{% extends 'base.html' %}
  
-{% block title %}インデックス{% endblock %}
+{% block title %}商品一覧{% endblock %}
  
 {% block content %}
-<p>インデックスコンテンツ</p>
+    <ul>
+        {% for product in products %}
+            <li><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>: {{ product.price }}円</li>
+        {% endfor %}
+    </ul>
+    <!-- ページネーション -->
+    {% if products.has_previous %}
+        <a href="?page={{ products.previous_page_number }}">前ページ</a>
+    {% else %}
+        前ページ
+    {% endif %}
+    {# 現在のページ番号 #}
+    {{ products.number }}ページ
+    {% if products.has_next %}
+        <a href="?page={{ products.next_page_number }}">次ページ</a>
+    {% else %}
+        次ページ
+    {% endif %}
 {% endblock %}
 </html>
